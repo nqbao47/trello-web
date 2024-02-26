@@ -4,7 +4,7 @@ import App from './App.jsx'
 import { CssBaseline } from '@mui/material'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 
-import theme from '../theme.js'
+import theme from './theme.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
