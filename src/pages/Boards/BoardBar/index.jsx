@@ -12,13 +12,14 @@ import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
 const MENU_STYLES = {
-  color: 'primary.main',
-  bgcolor: 'white',
+  color: 'white',
+  bgcolor: 'transparent',
   border: 'none',
-  paddingX: 2,
-  borderRadius: 5,
+  paddingX: 1,
+  borderRadius: 2,
+  marginRight: 2,
   '& .MuiSvgIcon-root': {
-    color: 'primary.main'
+    color: 'white'
   },
   '& .MuiSvgIcon-root:hover': {
     bgcolor: 'primary.50'
@@ -37,7 +38,9 @@ function BoardBar() {
         gap: 2,
         paddingX: 2,
         overflow: 'auto',
-        borderTop: '1px solid #00bfa5'
+        bgcolor: (theme) =>
+          theme.palette.mode === 'dark' ? '#2c3e50' : '#1976d2',
+        borderBottom: '1px solid white'
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -73,13 +76,29 @@ function BoardBar() {
         />
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button variant="outlined" startIcon={<PersonAddIcon />}>
+        <Button
+          sx={{
+            color: 'white',
+            borderColor: 'white',
+            '&:hover': { borderColor: 'white' }
+          }}
+          variant="outlined"
+          startIcon={<PersonAddIcon />}
+        >
           Invite
         </Button>
 
         <AvatarGroup
           max={5}
-          sx={{ '& .MuiAvatar-root': { width: 34, height: 34, fontSize: 16 } }}
+          sx={{
+            gap: '10px',
+            '& .MuiAvatar-root': {
+              width: 34,
+              height: 34,
+              fontSize: 16,
+              border: 'none'
+            }
+          }}
         >
           <Tooltip title="briannguyen">
             <Avatar
