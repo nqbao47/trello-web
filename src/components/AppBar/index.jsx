@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField'
 import Badge from '@mui/material/Badge'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 
 import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
 
@@ -21,7 +22,6 @@ import Profiles from './Menus/Profiles'
 function AppBar() {
   return (
     <Box
-      px={2}
       sx={{
         width: '100%',
         height: (theme) => theme.trello.appBarHeight,
@@ -29,14 +29,27 @@ function AppBar() {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 2,
+        paddingX: 2,
         overflowX: 'auto'
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <AppsIcon sx={{ color: 'primary.main' }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <SvgIcon component={TrelloIcon} inheritViewBox fontSize="small" sx={{ color: 'primary.main' }} />
-          <Typography variant="span" sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'primary.main' }}>
+          <SvgIcon
+            component={TrelloIcon}
+            inheritViewBox
+            fontSize="small"
+            sx={{ color: 'primary.main' }}
+          />
+          <Typography
+            variant="span"
+            sx={{
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              color: 'primary.main'
+            }}
+          >
             Trello
           </Typography>
         </Box>
@@ -46,13 +59,21 @@ function AppBar() {
           <Recent />
           <Starred />
           <Templates />
-          <Button variant="outlined">Create</Button>
+          <Button variant="outlined" startIcon={<LibraryAddIcon />}>
+            Create
+          </Button>
         </Box>
       </Box>
 
       {/* Left side */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <TextField id="outlined-search" label="Search here..." type="search" size="small" sx={{ minWidth: '120px' }} />
+        <TextField
+          id="outlined-search"
+          label="Search here..."
+          type="search"
+          size="small"
+          sx={{ minWidth: '120px' }}
+        />
         <ModeSelect />
         <Tooltip title="Notification ^^">
           <Badge sx={{ cursor: 'pointer' }} color="secondary" variant="dot">
