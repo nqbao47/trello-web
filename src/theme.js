@@ -22,7 +22,24 @@ const theme = extendTheme({
     }
   },
   components: {
-    // Name of the component
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          '*::-webkit-scrollbar': {
+            width: '10px',
+            height: '10px'
+          },
+          '*::-webkit-scrollbar-thumb': {
+            backgroundColor: '#CDFADB',
+            borderRadius: '10px'
+          },
+          '*::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#FFCF96',
+            borderRadius: '10px'
+          }
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         // Name of the slot
