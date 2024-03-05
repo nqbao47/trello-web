@@ -41,8 +41,7 @@ function BoardBar() {
         bgcolor: (theme) =>
           theme.palette.mode === 'dark' ? '#2c3e50' : '#1976d2',
         borderBottom: '1px solid white'
-      }}
-    >
+      }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Chip
           sx={MENU_STYLES}
@@ -83,8 +82,7 @@ function BoardBar() {
             '&:hover': { borderColor: 'white' }
           }}
           variant="outlined"
-          startIcon={<PersonAddIcon />}
-        >
+          startIcon={<PersonAddIcon />}>
           Invite
         </Button>
 
@@ -96,10 +94,11 @@ function BoardBar() {
               width: 34,
               height: 34,
               fontSize: 16,
-              border: 'none'
+              border: 'none',
+              cursor: 'pointer',
+              '&:first-of-type': { bgcolor: '#a4b0be' }
             }
-          }}
-        >
+          }}>
           <Tooltip title="briannguyen">
             <Avatar
               alt="Babi"
