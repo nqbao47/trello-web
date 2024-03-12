@@ -16,7 +16,7 @@ import CloseIcon from '@mui/icons-material/Close'
 
 import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
 
-import ModeSelect from '~/components/ModeSelect'
+import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import Workspaces from './Menus/Workspace'
 import Recent from './Menus/Recent'
 import Starred from './Menus/Starred'
