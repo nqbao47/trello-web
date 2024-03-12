@@ -22,7 +22,7 @@ const MENU_STYLES = {
     color: 'white'
   },
   '& .MuiSvgIcon-root:hover': {
-    bgcolor: 'primary.50'
+    bgcolor: 'primary'
   }
 }
 
@@ -38,41 +38,16 @@ function BoardBar() {
         gap: 2,
         paddingX: 2,
         overflow: 'auto',
-        bgcolor: (theme) =>
-          theme.palette.mode === 'dark' ? '#2c3e50' : '#1976d2',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#1976d2'),
         borderBottom: '1px solid white'
-      }}>
+      }}
+    >
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Chip
-          sx={MENU_STYLES}
-          icon={<DashboardIcon />}
-          label="briandev nguyen"
-          clickable
-        />
-        <Chip
-          sx={MENU_STYLES}
-          icon={<VpnLockIcon />}
-          label="Public/Private Workspaces"
-          clickable
-        />
-        <Chip
-          sx={MENU_STYLES}
-          icon={<AddToDriveIcon />}
-          label="Add to drive icon"
-          clickable
-        />
-        <Chip
-          sx={MENU_STYLES}
-          icon={<BoltIcon />}
-          label="Automation"
-          clickable
-        />
-        <Chip
-          sx={MENU_STYLES}
-          icon={<FilterListIcon />}
-          label="Filters"
-          clickable
-        />
+        <Chip sx={MENU_STYLES} icon={<DashboardIcon />} label="briandev nguyen" clickable />
+        <Chip sx={MENU_STYLES} icon={<VpnLockIcon />} label="Public/Private Workspaces" clickable />
+        <Chip sx={MENU_STYLES} icon={<AddToDriveIcon />} label="Add to drive icon" clickable />
+        <Chip sx={MENU_STYLES} icon={<BoltIcon />} label="Automation" clickable />
+        <Chip sx={MENU_STYLES} icon={<FilterListIcon />} label="Filters" clickable />
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Button
@@ -82,7 +57,8 @@ function BoardBar() {
             '&:hover': { borderColor: 'white' }
           }}
           variant="outlined"
-          startIcon={<PersonAddIcon />}>
+          startIcon={<PersonAddIcon />}
+        >
           Invite
         </Button>
 
@@ -98,7 +74,8 @@ function BoardBar() {
               cursor: 'pointer',
               '&:first-of-type': { bgcolor: '#a4b0be' }
             }
-          }}>
+          }}
+        >
           <Tooltip title="briannguyen">
             <Avatar
               alt="Babi"
