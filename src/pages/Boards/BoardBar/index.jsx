@@ -39,7 +39,10 @@ function BoardBar() {
         paddingX: 2,
         overflow: 'auto',
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#1976d2'),
-        borderBottom: '1px solid white'
+        borderBottom: '1px solid white',
+        '&::-webkit-scrollbar-track': {
+          m: 2
+        }
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center' }}>

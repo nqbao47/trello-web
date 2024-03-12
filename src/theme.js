@@ -6,6 +6,13 @@ const BOARD_CONTENT_HEIGHT = `calc(100vh - (${APP_BAR_HEIGHT} + ${BOARD_BAR_HEIG
 
 // Create a theme instance.
 const theme = extendTheme({
+  typography: {
+    fontFamily: 'Quicksand',
+    fontSupperBold: 700,
+    fontSupperRegular: 600,
+    fontSupperMedium: 500,
+    fontSupperLight: 100
+  },
   trello: {
     appBarHeight: APP_BAR_HEIGHT,
     boardBarHeight: BOARD_BAR_HEIGHT,
@@ -54,6 +61,16 @@ const theme = extendTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: { fontSize: '0.875rem' }
+      }
+    },
+    // chỉ ghi đè body1 thôi
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          '&.MuiTypography-body1': {
+            fontSize: '0.875rem'
+          }
+        }
       }
     },
     MuiOutlinedInput: {
