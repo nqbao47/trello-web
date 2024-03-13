@@ -10,51 +10,47 @@ import PeopleIcon from '@mui/icons-material/People'
 import ModeCommentIcon from '@mui/icons-material/ModeComment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-function Card({ temporaryHideMedia }) {
-  if (temporaryHideMedia) {
-    return (
-      <MuiCard
-        sx={{ cursor: 'pointer', boxShadow: '0 1px 1px rgba(0,0,0,0.2)', overflow: 'unset' }}
-      >
-        <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-          <Typography>brian dev</Typography>
-        </CardContent>
-      </MuiCard>
-    )
+function Card({ card }) {
+  const shouldShowCardAction = () => {
+    return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
 
   return (
     <MuiCard sx={{ cursor: 'pointer', boxShadow: '0 1px 1px rgba(0,0,0,0.2)', overflow: 'unset' }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="https://wallpapers.com/images/featured/stardew-valley-ltuynqpjb7c95ffq.jpg"
-        title="green iguana"
-      />
+      {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
       <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-        <Typography>brian dev</Typography>
+        <Typography>{card?.title}</Typography>
       </CardContent>
-      <CardActions
-        sx={{ p: '0 4px 8px 4px', justifyContent: 'space-between', color: 'primary.main' }}
-      >
-        <Tooltip title="people">
-          <Button>
-            <PeopleIcon sx={{ cursor: 'pointer' }} />
-            20
-          </Button>
-        </Tooltip>
-        <Tooltip title="comment">
-          <Button>
-            <ModeCommentIcon sx={{ cursor: 'pointer' }} />
-            20
-          </Button>
-        </Tooltip>
-        <Tooltip title="attachment">
-          <Button>
-            <AttachmentIcon sx={{ cursor: 'pointer' }} />
-            20
-          </Button>
-        </Tooltip>
-      </CardActions>
+      {shouldShowCardAction() && (
+        <CardActions
+          sx={{ p: '0 4px 8px 4px', justifyContent: 'space-between', color: 'primary.main' }}
+        >
+          <Tooltip title="people">
+            {!!card?.memberIds?.length && (
+              <Button>
+                <PeopleIcon sx={{ cursor: 'pointer' }} />
+                {card?.memberIds?.length}
+              </Button>
+            )}
+          </Tooltip>
+          <Tooltip title="comment">
+            {!!card?.comments?.length && (
+              <Button>
+                <ModeCommentIcon sx={{ cursor: 'pointer' }} />
+                {card?.comments?.length}
+              </Button>
+            )}
+          </Tooltip>
+          <Tooltip title="attachment">
+            {!!card?.attachments?.length && (
+              <Button>
+                <AttachmentIcon sx={{ cursor: 'pointer' }} />
+                {card?.attachments?.length}
+              </Button>
+            )}
+          </Tooltip>
+        </CardActions>
+      )}
     </MuiCard>
   )
 }
