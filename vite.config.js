@@ -4,6 +4,7 @@ import svgr from '@svgr/rollup'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/trello-web/',
   plugins: [react(), svgr()],
   resolve: {
     alias: [{ find: '~', replacement: '/src' }]
