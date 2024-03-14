@@ -20,8 +20,23 @@ import DragHandleIcon from '@mui/icons-material/DragHandle'
 
 import ListCards from './ListCards/ListCards'
 import { mapOrder } from '~/utils/sorts'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 function Column({ column }) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: column._id,
+    data: { ...column } // Bổ sung data sau khi đã kéo thả
+  })
+
+  const dndKitColumnStyles = {
+    // touchAction: 'none', // Dành cho sensor default dạng PointerSensor
+
+    // transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform), // Translate giúp tránh bị bể kích thước (stretch) item khi kéo thả
+    transition
+  }
+
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
@@ -37,6 +52,10 @@ function Column({ column }) {
 
   return (
     <Box
+      ref={setNodeRef}
+      style={dndKitColumnStyles}
+      {...attributes}
+      {...listeners}
       sx={{
         maxWidth: '300px',
         minWidth: '300px',
