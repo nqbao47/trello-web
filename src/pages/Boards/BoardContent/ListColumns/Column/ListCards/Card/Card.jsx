@@ -23,7 +23,8 @@ function Card({ card }) {
     // transform: CSS.Transform.toString(transform),
     transform: CSS.Translate.toString(transform), // Translate giúp tránh bị bể kích thước (stretch) item khi kéo thả
     transition,
-    opacity: isDragging ? 0.5 : undefined
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '1px solid #2ecc71' : undefined
   }
 
   const shouldShowCardAction = () => {
@@ -43,9 +44,7 @@ function Card({ card }) {
         <Typography>{card?.title}</Typography>
       </CardContent>
       {shouldShowCardAction() && (
-        <CardActions
-          sx={{ p: '0 4px 8px 4px', justifyContent: 'space-between', color: 'primary.main' }}
-        >
+        <CardActions sx={{ p: '0 4px 8px 4px', justifyContent: 'space-between', color: 'primary.main' }}>
           <Tooltip title="people">
             {!!card?.memberIds?.length && (
               <Button>
