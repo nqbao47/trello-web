@@ -293,20 +293,22 @@ function BoardContent({ board }) {
       // Tìm các điểm giao nhau
       const pointerIntersections = pointerWithin(args)
 
+      // Fix flickering khi kéo 1 card có hình ảnh lên trên cùng ra ngoài boardContent
+      if (!pointerIntersections?.length) return
       /**
        * Thuật toán va chạm sẽ trả về một mảng các va chạm ở đây
        * !!pointerIntersections?.length = pointerIntersections?.length > 0
        */
-      const intersections = !!pointerIntersections?.length ? pointerIntersections : rectIntersection(args)
+      // const intersections = !!pointerIntersections?.length ? pointerIntersections : rectIntersection(args)
 
       // Tìm overId đầu tiên trong intersections
-      let overId = getFirstCollision(intersections, 'id')
+      let overId = getFirstCollision(pointerIntersections, 'id')
       if (overId) {
-        // Nếu over là Column thì sẽ tìm đến cardId gần nhất bên trong kv va chạm đó dựa vào closestCenter
+        // Nếu over là Column thì sẽ tìm đến cardId gần nhất bên trong kv va chạm đó dựa vào closestCorners
         const checkColumn = orderedColumns.find((column) => column._id === overId)
         if (checkColumn) {
           // console.log('overId before: ', overId)
-          overId = closestCenter({
+          overId = closestCorners({
             ...args,
             droppableContainers: args.droppableContainers.filter((container) => {
               return container.id !== overId && checkColumn?.cardOrderIds?.includes(container.id)
