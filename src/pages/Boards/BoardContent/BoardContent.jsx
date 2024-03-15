@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
+import { generatePlaceholderCard } from '~/utils/formatters'
 import {
   DndContext,
   MouseSensor,
@@ -11,13 +12,11 @@ import {
   DragOverlay,
   defaultDropAnimationSideEffects,
   closestCorners,
-  closestCenter,
   pointerWithin,
-  rectIntersection,
   getFirstCollision
 } from '@dnd-kit/core'
 
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 import { arrayMove } from '@dnd-kit/sortable'
 
 import Column from './ListColumns/Column/Column'
@@ -100,6 +99,15 @@ function BoardContent({ board }) {
       if (nextActiveColumn) {
         // Khi kéo card sang column khác thì xoá card ở column đang active đi
         nextActiveColumn.cards = nextActiveColumn.cards.filter((card) => card._id !== activeDraggingCardId)
+
+        /** Thêm PlaceholderCard nếu Column empty
+         * Sử dụng lodash để check [rỗng]
+         * Cần tạo ra func để thực hiện việc thêm PlaceholderCard vào Column rỗng
+         *  */
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]
+        }
+
         // Update lại mảng cardOrderIds cho chuẩn dữ liệu
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id)
       }
@@ -115,6 +123,10 @@ function BoardContent({ board }) {
         }
         // Thêm card đã kéo sang column mới theo vị trí index mới
         nextOverColumn.cards = nextOverColumn.cards.toSpliced(newCardIndex, 0, rebuild_activeDraggingCardData)
+
+        // Xoá PlaceholderCard đi nếu nó tồn tại
+        nextOverColumn.cards = nextOverColumn.cards.filter((card) => !card.FE_PlaceholderCard)
+
         // Update lại mảng cardOrderIds cho chuẩn dữ liệu
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map((card) => card._id)
       }
