@@ -14,7 +14,7 @@ function ListColumns({ columns, createNewColumn, createNewCard }) {
 
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
-  const handleAddNewColumn = async () => {
+  const handleAddNewColumn = () => {
     if (!newColumnTitle) {
       toast.error('Oops!! Please enter Columns Title... !')
       return
@@ -25,7 +25,7 @@ function ListColumns({ columns, createNewColumn, createNewCard }) {
       title: newColumnTitle
     }
 
-    await createNewColumn(newColumnData)
+    createNewColumn(newColumnData)
 
     // Close add form and Clear input
     toggleNewColumnForm()
@@ -33,9 +33,11 @@ function ListColumns({ columns, createNewColumn, createNewCard }) {
   }
 
   return (
-    // SortableContext yêu cầu items là một mảng ['id-1', 'id-2'],
-    // không nhận vào items dạng [{id: 'íd-1'}, {id: 'íd-2'}]
-    // khắc phục : items={columns?.map((c) => c._id)}
+    /**
+     * SortableContext yêu cầu items là một mảng ['id-1', 'id-2'],
+     * không nhận vào items dạng [{id: 'íd-1'}, {id: 'íd-2'}]
+     * khắc phục : items={columns?.map((c) => c._id)}
+     */
     <SortableContext items={columns?.map((c) => c._id)} strategy={horizontalListSortingStrategy}>
       <Box
         sx={{

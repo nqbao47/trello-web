@@ -23,7 +23,6 @@ import AddCardIcon from '@mui/icons-material/AddCard'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 
 import ListCards from './ListCards/ListCards'
-import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
@@ -33,7 +32,7 @@ function Column({ column, createNewCard }) {
 
   const [newCardTitle, setNewCardTitle] = useState('')
 
-  const handleAddNewCard = async () => {
+  const handleAddNewCard = () => {
     if (!newCardTitle) {
       toast.error('Oops!! Please enter Card Title... !')
 
@@ -46,7 +45,7 @@ function Column({ column, createNewCard }) {
       columnId: column._id
     }
 
-    await createNewCard(newCardData)
+    createNewCard(newCardData)
 
     // Close add form and Clear input
     toggleNewCardForm()
@@ -79,7 +78,8 @@ function Column({ column, createNewCard }) {
     setAnchorEl(null)
   }
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+  // Cards đã được sắp xếp từ Component cha (_id.js)
+  const orderedCards = column.cards
 
   return (
     <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
