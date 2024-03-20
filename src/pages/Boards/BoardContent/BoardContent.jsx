@@ -5,8 +5,8 @@ import { mapOrder } from '~/utils/sorts'
 import { generatePlaceholderCard } from '~/utils/formatters'
 import {
   DndContext,
-  MouseSensor,
-  TouchSensor,
+  // MouseSensor,
+  // TouchSensor,
   useSensor,
   useSensors,
   DragOverlay,
@@ -15,10 +15,10 @@ import {
   pointerWithin,
   getFirstCollision
 } from '@dnd-kit/core'
+import { MouseSensor, TouchSensor } from '~/customLibs/DndKitSensors'
 
 import { cloneDeep, isEmpty } from 'lodash'
 import { arrayMove } from '@dnd-kit/sortable'
-
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
 
