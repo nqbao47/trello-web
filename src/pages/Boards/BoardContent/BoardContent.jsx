@@ -28,7 +28,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   // Yêu cầu chuột di chuyển 10px thì mới active event => fix click gọi event
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -267,13 +267,10 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
         // dùng arrayMove sắp xếp lại mảng ban đầu
         const dndOrderedColumns = arrayMove(orderedColumns, oldColumnIndex, newColumnIndex)
 
-        /**
-         * Sử dụng dndOrderdColumnIds dùng để xử lý gọi API
-         * const dndOrderdColumnIds = dndOrderdColumns.map((c) => c._id)
-         * console.log('dndOrderdColumns: ', dndOrderdColumns)
-         * console.log('dndOrderdColumns: ', dndOrderdColumnIds)
-         * */
+        // Tạm thời gọi lên Props function moveColumns nằm ở Component cha
+        moveColumns(dndOrderedColumns)
 
+        // Small trick: ở đây tiếp tục gọi update State để tránh Delay hoặc Flikering UI lúc kéo thả cần phải chờ call API
         setOrderedColumns(dndOrderedColumns)
       }
     }
