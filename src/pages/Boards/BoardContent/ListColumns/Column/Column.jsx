@@ -27,20 +27,26 @@ import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-function Column({ column }) {
+function Column({ column, createNewCard }) {
   const [openNewCardForm, setOpenNewCardForm] = useState(false)
   const toggleNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
 
   const [newCardTitle, setNewCardTitle] = useState('')
-  const handleAddNewCard = () => {
+
+  const handleAddNewCard = async () => {
     if (!newCardTitle) {
       toast.error('Oops!! Please enter Card Title... !')
 
       return
     }
-    // console.log(newCardTitle)
-    // Call API ...
-    toast.success('Created Card Successfully !!')
+
+    // Create data Card để call API
+    const newCardData = {
+      title: newCardTitle,
+      columnId: column._id
+    }
+
+    await createNewCard(newCardData)
 
     // Close add form and Clear input
     toggleNewCardForm()

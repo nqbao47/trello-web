@@ -8,19 +8,24 @@ import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 
-function ListColumns({ columns }) {
+function ListColumns({ columns, createNewColumn, createNewCard }) {
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const toggleNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
   const [newColumnTitle, setNewColumnTitle] = useState('')
-  const handleAddNewColumn = () => {
+
+  const handleAddNewColumn = async () => {
     if (!newColumnTitle) {
       toast.error('Oops!! Please enter Columns Title... !')
       return
     }
-    // console.log(newColumnTitle)
-    // Call API ...
-    toast.success('Created Column Successfully !!')
+
+    // Create data Column để call API
+    const newColumnData = {
+      title: newColumnTitle
+    }
+
+    await createNewColumn(newColumnData)
 
     // Close add form and Clear input
     toggleNewColumnForm()
@@ -46,7 +51,7 @@ function ListColumns({ columns }) {
         }}
       >
         {columns?.map((column) => (
-          <Column key={column._id} column={column} />
+          <Column key={column._id} column={column} createNewCard={createNewCard} />
         ))}
 
         {/* Box add new Column */}
