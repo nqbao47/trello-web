@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { useState } from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -32,11 +34,13 @@ function Column({ column }) {
   const [newCardTitle, setNewCardTitle] = useState('')
   const handleAddNewCard = () => {
     if (!newCardTitle) {
-      // console.log('Nhập vào title trước đã')
+      toast.error('Oops!! Please enter Card Title... !')
+
       return
     }
     // console.log(newCardTitle)
     // Call API ...
+    toast.success('Created Card Successfully !!')
 
     // Close add form and Clear input
     toggleNewCardForm()
