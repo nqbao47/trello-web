@@ -10,7 +10,8 @@ import {
   createNewColumnsAPI,
   createNewCardAPI,
   updateBoardDetailsAPI,
-  updateColumnDetailsAPI
+  updateColumnDetailsAPI,
+  moveCardToDifferentColumnAPI
 } from '~/apis'
 
 import { generatePlaceholderCard } from '~/utils/formatters'
@@ -115,6 +116,35 @@ function Board() {
     updateColumnDetailsAPI(columnId, { cardOrderIds: dndOrderedCardIds })
   }
 
+  /** [API] Các bước kéo thả Cards sang Column khác
+   * B1: Update mảng cardOrderIds của Column ban đầu chứa nó (Xoá _id của Card ra khỏi mảng)
+   * B2: Update mảng cardOrderIds của Column tiếp theo (Thêm _id của Card vào mảng)
+   * B3: Update lại  trường columnId mới của cái Card đã kéo
+   * => làm 1 API riêng
+   */
+  const moveCardToDifferentColumn = (currentCardId, prevColumnId, nextColumnId, dndOrderedColumns) => {
+    console.log('🚀 ~ moveCardToDifferentColumn ~ dndOrderedColumns:', dndOrderedColumns)
+    console.log('🚀 ~ moveCardToDifferentColumn ~ nextColumnId:', nextColumnId)
+    console.log('🚀 ~ moveCardToDifferentColumn ~ prevColumnId:', prevColumnId)
+    console.log('🚀 ~ moveCardToDifferentColumn ~ currentCardId:', currentCardId)
+
+    // Update lại state board cho chuẩn dữ liệu sau khi kéo thả Column
+    const dndOrderedColumnIds = dndOrderedColumns.map((c) => c._id)
+    const newBoard = { ...board }
+    newBoard.columns = dndOrderedColumns
+    newBoard.columnOrderIds = dndOrderedColumnIds
+    setBoard(newBoard)
+
+    // Call API xử lý phía Backend
+    moveCardToDifferentColumnAPI({
+      currentCardId,
+      prevColumnId,
+      prevCardOrderIds: dndOrderedColumns.find((c) => c._id === prevColumnId)?.cardOrderIds,
+      nextColumnId,
+      nextCardOrderIds: dndOrderedColumns.find((c) => c._id === nextColumnId)?.cardOrderIds
+    })
+  }
+
   if (!board) {
     return (
       <Box
@@ -143,6 +173,7 @@ function Board() {
         createNewCard={createNewCard}
         moveColumns={moveColumns}
         moveCardInTheSameColumn={moveCardInTheSameColumn}
+        moveCardToDifferentColumn={moveCardToDifferentColumn}
       />
     </Container>
   )
