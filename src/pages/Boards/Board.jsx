@@ -3,7 +3,6 @@ import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
 import { mapOrder } from '~/utils/sorts'
-
 import { useEffect, useState } from 'react'
 import {
   fetchBoardDetailsAPI,
@@ -13,14 +12,13 @@ import {
   updateColumnDetailsAPI,
   moveCardToDifferentColumnAPI
 } from '~/apis'
-
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { isEmpty } from 'lodash'
 import { Box } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 
-function Board() {
+export function Board() {
   const [board, setBoard] = useState(null)
 
   useEffect(() => {
@@ -77,11 +75,9 @@ function Board() {
     if (columnToUpdate) {
       columnToUpdate.cards.push(createdCard)
       columnToUpdate.cardOrderIds.push(createdCard._id)
-
-      // Xóa các placeholder cards
-      columnToUpdate.cards = columnToUpdate.cards.filter((card) => !card._id.includes('-placeholder-card'))
-      columnToUpdate.cardOrderIds = columnToUpdate.cards.map((card) => card._id)
     }
+    // columnToUpdate.shift()
+    console.log('🚀 ~ createNewCard ~ columnToUpdate:', columnToUpdate)
     setBoard(newBoard)
   }
 
@@ -184,5 +180,3 @@ function Board() {
     </Container>
   )
 }
-
-export default Board
