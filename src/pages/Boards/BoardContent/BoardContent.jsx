@@ -33,7 +33,8 @@ function BoardContent({
   createNewCard,
   moveColumns,
   moveCardInTheSameColumn,
-  moveCardToDifferentColumn
+  moveCardToDifferentColumn,
+  deleteColumnDetails
 }) {
   // Yêu cầu chuột di chuyển 10px thì mới active event => fix click gọi event
   const mouseSensor = useSensor(MouseSensor, {
@@ -380,7 +381,12 @@ function BoardContent({
           p: '10px 0'
         }}
       >
-        <ListColumns columns={orderedColumns} createNewColumn={createNewColumn} createNewCard={createNewCard} />
+        <ListColumns
+          columns={orderedColumns}
+          createNewColumn={createNewColumn}
+          createNewCard={createNewCard}
+          deleteColumnDetails={deleteColumnDetails}
+        />
         <DragOverlay dropAnimation={myDropAnimation}>
           {!activeDragItemType && null}
           {activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN && <Column column={activeDragItemData} />}
