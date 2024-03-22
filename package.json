@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": "18.x"
+    "node": "18.16.0"
   },
   "scripts": {
     "dev": "vite --host",
@@ -24,6 +24,7 @@
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
     "axios": "^1.6.8",
+    "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
     "material-ui-confirm": "^3.0.11",
     "react": "^18.2.0",
