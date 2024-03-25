@@ -43,3 +43,13 @@ export const createNewCardAPI = async (newCardData) => {
   const response = await axios.post(`${API_ROOT}/v1/cards`, newCardData)
   return response.data
 }
+
+/** Search items */
+export const searchItemsAPI = async (searchQuery) => {
+  const response = await axios.get(`${API_ROOT}/v1/cards/search`, {
+    params: {
+      query: searchQuery
+    }
+  })
+  return response.data
+}
