@@ -12,7 +12,8 @@ import {
   updateBoardDetailsAPI,
   updateColumnDetailsAPI,
   moveCardToDifferentColumnAPI,
-  deleteColumnDetailsAPI
+  deleteColumnDetailsAPI,
+  searchItemsAPI
 } from '~/apis'
 
 import { generatePlaceholderCard } from '~/utils/formatters'
@@ -167,6 +168,11 @@ function Board() {
     })
   }
 
+  // Call API to search
+  const searchItems = async (searchQuery) => {
+    return searchItemsAPI(searchQuery)
+  }
+
   if (!board) {
     return (
       <Box
@@ -187,7 +193,7 @@ function Board() {
 
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
-      <AppBar />
+      <AppBar searchItems={searchItems} />
       <BoardBar board={board} />
       <BoardContent
         board={board}

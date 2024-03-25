@@ -1,19 +1,12 @@
-import { useState } from 'react'
-
 import Box from '@mui/material/Box'
 import { Typography } from '@mui/material'
 import AppsIcon from '@mui/icons-material/Apps'
 import SvgIcon from '@mui/material/SvgIcon'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Badge from '@mui/material/Badge'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
-import InputAdornment from '@mui/material/InputAdornment'
-import SearchIcon from '@mui/icons-material/Search'
-import CloseIcon from '@mui/icons-material/Close'
-
 import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
 
 import ModeSelect from '~/components/ModeSelect/ModeSelect'
@@ -23,10 +16,9 @@ import Starred from './Menus/Starred'
 import Templates from './Menus/Templates'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Profiles from './Menus/Profiles'
+import Search from '~/components/Search/Search'
 
-function AppBar() {
-  const [searchValue, setSearchValue] = useState('')
-
+function AppBar({ searchItems }) {
   return (
     <Box
       sx={{
@@ -82,51 +74,7 @@ function AppBar() {
 
       {/* Right side */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <TextField
-          id="outlined-search"
-          label="Search here..."
-          type="text"
-          size="small"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: 'white' }} />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <CloseIcon
-                  fontSize="small"
-                  sx={{
-                    color: searchValue ? 'white' : 'transparent',
-                    cursor: 'pointer'
-                  }}
-                  onClick={() => setSearchValue('')}
-                />
-              </InputAdornment>
-            )
-          }}
-          sx={{
-            minWidth: '120px',
-            maxWidth: '180px',
-            '& label': { color: 'white' },
-            '& input': { color: 'white' },
-            '& label.Mui-focused': { color: 'white' },
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'white'
-              },
-              '&:hover fieldset': {
-                borderColor: 'white'
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: 'white'
-              }
-            }
-          }}
-        />
+        <Search searchItems={searchItems} />
         <ModeSelect />
         <Tooltip title="Notification ^^">
           <Badge sx={{ cursor: 'pointer' }} color="warning" variant="dot">
