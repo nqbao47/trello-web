@@ -109,7 +109,8 @@ function Column({ column, createNewCard, deleteColumnDetails }) {
           minWidth: '300px',
           ml: 2,
           borderRadius: '6px',
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
+          bgcolor: (theme) =>
+            theme.palette.mode === 'dark' ? theme.trello.colors.darkModeColumn : theme.trello.colors.lightModeColumn,
           height: 'fit-content',
           maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)} )`
         }}
@@ -235,7 +236,7 @@ function Column({ column, createNewCard, deleteColumnDetails }) {
                 justifyContent: 'space-between'
               }}
             >
-              <Button startIcon={<AddCardIcon />} onClick={toggleNewCardForm}>
+              <Button sx={{ color: '#99B080' }} startIcon={<AddCardIcon />} onClick={toggleNewCardForm}>
                 Add new card
               </Button>
               <Tooltip title="Drag to move">
@@ -262,7 +263,7 @@ function Column({ column, createNewCard, deleteColumnDetails }) {
                 onChange={(e) => setNewCardTitle(e.target.value)}
                 sx={{
                   gap: 1,
-                  '& label': { color: 'text.primary' },
+                  '& label': { color: '#748E63' },
                   '& input': {
                     color: (theme) => theme.palette.primary.main,
                     bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : 'white')

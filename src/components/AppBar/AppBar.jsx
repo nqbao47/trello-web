@@ -1,13 +1,12 @@
 import Box from '@mui/material/Box'
 import { Typography } from '@mui/material'
-import AppsIcon from '@mui/icons-material/Apps'
 import SvgIcon from '@mui/material/SvgIcon'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Button from '@mui/material/Button'
 import Badge from '@mui/material/Badge'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
 
 import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import Workspaces from './Menus/Workspace'
@@ -30,25 +29,25 @@ function AppBar({ searchItems }) {
         gap: 2,
         paddingX: 2,
         overflowX: 'auto',
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#1565c0'),
+        bgcolor: (theme) =>
+          theme.palette.mode === 'dark' ? theme.trello.colors.darkModeAppBar : theme.trello.colors.lightModeAppBar,
         '&::-webkit-scrollbar-track': {
           m: 2
         }
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <AppsIcon sx={{ color: 'white' }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <SvgIcon component={TrelloIcon} inheritViewBox fontSize="small" sx={{ color: 'white' }} />
+          <SvgIcon component={FavoriteBorderIcon} inheritViewBox fontSize="large" sx={{ color: 'white' }} />
           <Typography
             variant="span"
             sx={{
-              fontSize: '1.2rem',
+              fontSize: '1.5rem',
               fontWeight: 'bold',
               color: 'white'
             }}
           >
-            Trello
+            Mercilaz
           </Typography>
         </Box>
 

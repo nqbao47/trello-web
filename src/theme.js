@@ -6,6 +6,18 @@ const BOARD_CONTENT_HEIGHT = `calc(100vh - (${APP_BAR_HEIGHT} + ${BOARD_BAR_HEIG
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
 
+const colors = {
+  darkModeAppBar: '#2c3e50',
+  darkModeBoardBar: '#2c3e50',
+  darkModeBoardContent: '#34495e',
+  darkModeColumn: '#333643',
+
+  lightModeAppBar: '#748E63',
+  lightModeBoardBar: '#748E63',
+  lightModeBoardContent: '#99B080',
+  lightModeColumn: '#ebecf0'
+}
+
 // Create a theme instance.
 const theme = extendTheme({
   typography: {
@@ -20,21 +32,8 @@ const theme = extendTheme({
     boardBarHeight: BOARD_BAR_HEIGHT,
     boardContentHeight: BOARD_CONTENT_HEIGHT,
     columnHeaderHeight: COLUMN_HEADER_HEIGHT,
-    columnFooterHeight: COLUMN_FOOTER_HEIGHT
-  },
-  colorSchemes: {
-    // light: {
-    //   palette: {
-    //     primary: teal,
-    //     secondary: deepOrange
-    //   }
-    // },
-    // dark: {
-    //   palette: {
-    //     primary: cyan,
-    //     secondary: orange
-    //   }
-    // }
+    columnFooterHeight: COLUMN_FOOTER_HEIGHT,
+    colors: colors
   },
   components: {
     MuiCssBaseline: {

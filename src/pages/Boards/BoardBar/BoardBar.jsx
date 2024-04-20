@@ -39,7 +39,8 @@ function BoardBar({ board }) {
         gap: 2,
         paddingX: 2,
         overflow: 'auto',
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#1976d2'),
+        bgcolor: (theme) =>
+          theme.palette.mode === 'dark' ? theme.trello.colors.darkModeBoardBar : theme.trello.colors.lightModeBoardBar,
         '&::-webkit-scrollbar-track': {
           m: 2
         }
