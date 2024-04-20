@@ -56,15 +56,21 @@ function Board() {
       boardId: board._id
     })
 
+    // Lấy ra các response cần thiết từ API
+    const { column, message } = createdColumn
+
     // Fix lỗi Column Empty: khi tạo Column mới thì nó sẽ chưa có Card ẩn
-    createdColumn.cards = [generatePlaceholderCard(createdColumn)]
-    createdColumn.cardOrderIds = [generatePlaceholderCard(createdColumn)._id]
+    column.cards = [generatePlaceholderCard(column)]
+    column.cardOrderIds = [generatePlaceholderCard(column)._id]
 
     // Update state board sau khi tạo Column
     const newBoard = { ...board }
-    newBoard.columns.push(createdColumn)
-    newBoard.columnOrderIds.push(createdColumn._id)
+    newBoard.columns.push(column)
+    newBoard.columnOrderIds.push(column._id)
     setBoard(newBoard)
+
+    // Toast notification
+    toast.success(message)
   }
 
   // Call API để tạo mới 1 Column và set lại State cho Board
@@ -74,18 +80,22 @@ function Board() {
       boardId: board._id
     })
 
+    const { card, message } = createdCard
+
     // Update state board khi tạo Card
     const newBoard = { ...board }
-    const columnToUpdate = newBoard.columns.find((column) => column._id === createdCard.columnId)
+    const columnToUpdate = newBoard.columns.find((column) => column._id === card.columnId)
     if (columnToUpdate) {
-      columnToUpdate.cards.push(createdCard)
-      columnToUpdate.cardOrderIds.push(createdCard._id)
+      columnToUpdate.cards.push(card)
+      columnToUpdate.cardOrderIds.push(card._id)
 
       // Xóa các placeholder cards
       columnToUpdate.cards = columnToUpdate.cards.filter((card) => !card._id.includes('-placeholder-card'))
       columnToUpdate.cardOrderIds = columnToUpdate.cards.map((card) => card._id)
     }
     setBoard(newBoard)
+
+    toast.success(message)
   }
 
   /**
