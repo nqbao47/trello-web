@@ -16,14 +16,17 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Divider from '@mui/material/Divider'
 import ListItemText from '@mui/material/ListItemText'
-import ContentCut from '@mui/icons-material/ContentCut'
-import Cloud from '@mui/icons-material/Cloud'
 import Box from '@mui/material/Box'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import EditIcon from '@mui/icons-material/Edit'
-import AddCardIcon from '@mui/icons-material/AddCard'
+import LabelIcon from '@mui/icons-material/Label'
+import EditCalendarIcon from '@mui/icons-material/EditCalendar'
+import WallpaperIcon from '@mui/icons-material/Wallpaper'
+import GroupsIcon from '@mui/icons-material/Groups'
+import MovingIcon from '@mui/icons-material/Moving'
+import ArchiveIcon from '@mui/icons-material/Archive'
 
 function Card({ card }) {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -140,8 +143,8 @@ function Card({ card }) {
             onClick={handleClose}
             MenuListProps={{ 'aria-labelledby': 'basic-card-dropdown' }}
           >
-            <MenuItem
-              // onClick={toggleNewCardForm}
+            {/* <MenuItem
+              onClick={toggleNewCardForm}
               sx={{
                 '&:hover': {
                   color: 'success.light',
@@ -155,24 +158,48 @@ function Card({ card }) {
                 <AddCardIcon className="open-card-detail" fontSize="small" />
               </ListItemIcon>
               <ListItemText>Open card detail</ListItemText>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem>
               <ListItemIcon>
-                <ContentCut fontSize="small" />
+                <LabelIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Edit label</ListItemText>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <ContentCopyIcon fontSize="small" />
+                <EditCalendarIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText>Duplicate</ListItemText>
+              <ListItemText>Edit date</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <WallpaperIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Change Cover</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <GroupsIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Change Members</ListItemText>
             </MenuItem>
 
             <Divider />
             <MenuItem>
               <ListItemIcon>
-                <Cloud fontSize="small" />
+                <MovingIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Move</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <ContentCopyIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Copy</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <ArchiveIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Archive</ListItemText>
             </MenuItem>
